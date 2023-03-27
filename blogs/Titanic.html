@@ -1,0 +1,71 @@
+<html>
+   <head>
+    <title>Titanic blog</title>
+	<link rel="stylesheet" href="assets/css/blogcss.css" />
+   <head>
+<body style="background-color: #85B8CB;">
+<div class="header">
+  <h2>Titanic Blog</h2>
+  
+</div>
+
+<div class="row">
+  <div class="centercolumn">
+    <div class="card">
+      <h2>Titanic Survivors Prediction</h2>
+      <img src="images/titanic.png" alt="Titanic image" width="950" height="500">
+      <p></p>
+      <h3>Introduction:</h3>
+      <p style="text-align: justify;">On April 15, 1912, during her maiden voyage, the widely considered “unsinkable” RMS Titanic sank after colliding with an iceberg. Resulting in the death of 1502 out of 2224 passengers and crew.
+        While there was some element of luck involved in surviving, it seems some groups of people were more likely to survive than others.</p>
+      <h3>Challenge:</h3>
+      <p style="text-align: justify;">The challenge is to build a predictive model that answers the question: “what sorts of people were more likely to survive?” using passenger data (ie name, age, gender, socio-economic class, etc).</p>
+      <h3>Dataset:</h3>
+        <p style="text-align: justify;">train.csv and test.csv data sets are provides to us for this competition.
+        Train dataset  (train.csv) is used for training the model and test dataset (test.csv) is used for prediction. train.csv contains the details of a subset of the passengers on board (891 passengers, to be exact -- where each passenger gets a different row in the table).Using the patterns found in train.csv, we have to predict whether the other 418 passengers on board (in test.csv) survived.
+        </p>
+	<p style="text-align: justify;">Submission File Format: The submission file is csv file with 2 columns passengerId and Survived</p> 
+    </div>
+    <div class="card">
+      <h2>Data Mining Approach</h2>
+      
+      <br>
+      <p><b>[1]</b> To load train data</p>
+      <br>
+      <img src="images/Step1.svg" alt="Step 1" width="950" height="250">
+      <p><b>[2]</b> To load test data</p>
+      <br>
+      <img src="images/Step2.svg" alt="Step 2" width="950" height="250">
+  
+      <p><b>[3]</b> Female passengers survived</p>
+      <br>
+      <img src="images/Step3.svg" alt="Step 3" width="950" height="125">
+
+      <p><b>[4]</b> Male passengers survived</p>
+      <br>
+      <img src="images/Step4.svg" alt="Step 4" width="950" height="125">
+      
+    </div>
+    <div class="card">
+      <h2>Random Forest Classifier Model</h2>
+      <br>
+      <p style="text-align: justify;">In this to train the model we used random forest classifier, considering patterns in four different columns ("Pclass", "Sex", "SibSp", and "Parch") of the data. It constructs the trees in the random forest model based on patterns in the train.csv file, before generating predictions for the passengers in test.csv. The code also saves these new predictions in a CSV file submission.csv.</p>
+      <img src="images/Step5.svg" alt="Step 5" width="950" height="300">
+
+    </div>
+    <div class="card">
+      <h2>Submission</h2>
+      <br>
+      <img src="images/Step6.svg" alt="Step 6" width="950" height="300">
+      <p style="text-align: center;"> <b>Submission score: 0.77511</b></p>
+
+      <h4 style="text-align: end;">Reference - <a href="https://www.kaggle.com/code/alexisbcook/titanic-tutorial/notebook">Titanic Notebook</a></h4>
+    </div>
+  </div>
+
+  
+</div>
+
+</body>
+
+</html>
