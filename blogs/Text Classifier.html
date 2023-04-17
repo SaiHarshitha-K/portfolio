@@ -1,0 +1,110 @@
+<html>
+
+<head>
+	<title>Text Classification</title>
+	<link rel="stylesheet" href="assets/css/blogcss.css" />
+
+	<head>
+
+	<body style="background-color: #fff; align-items: center;">
+		<div class="header">
+			<h2>Text Classification of Rotten Tomatoes Reviews using Naive bayes classification</h2>
+			<hr>
+		</div>
+
+		<div class="row">
+			<div class="centercolumn">
+				<div class="card" style="width: 1000">
+					<img src="images/image prob.jpeg" alt="bayes image" width="1000" height="500">
+					<p></p>
+					<h3>Introduction</h3>
+					<p><u>Text classification using Naive bayes theorem with out using libraries related to Naive bayes
+							theorem.</u>
+					<p>
+					<p>We used dataset from kaggle (Rotten Tomatoes Reviews), Our Aim is to build a Naive Base
+						Classifier from scratch and to learn Naive Base Classifier.</p>
+					<h3>Conditional Probability:</h3>
+					<p>The possibility of an event happening given that another event has already occurred is known as a
+						conditional probability. </p>
+					<p>conditional probability
+					<p>
+						<img src="images/con_prob.jpeg" width="400" height="200" />
+					<h3>What Is the Naive Bayes Algorithm</h3>
+					<p>It is a classification technique based on  Bayes Theorem with the assumption of predictor
+						independence. A Naive Bayes classifier, to put it simply, believes that the presence of one
+						feature in a class has nothing to do with the presence of any other feature</p>
+					<img src="images/naive.jpeg" width="400" height="250" />
+					<p>Given a features vector X=(x1,x2,…,xn) and a class variable y, Bayes Theorem states that:</p>
+					<img src="images/navie formula.jpeg" width="400" height="150" />
+					<p>by conditional independence, we have:</p>
+					<img src="images/formula explain.jpeg" width="350" height="150" />
+					<h3>Laplace Smoothing</h3>
+					<p>Laplace smoothing is a smoothing method that handles the Naive Bayes issue of zero probability.
+						Using Laplace smoothing, we can represent P(w’|positive) as</p>
+					<img src="images/smoothing.jpeg" width="400" height="150" />
+					<p>Here,</p>
+					<p>alpha represents the smoothing parameter</p>
+					<p>K represents the number of dimensions (features) in the data, and</p>
+					<p>N represents the number of reviews with y=positive</p>
+					<p>If we choose a value of alpha!=0 (not equal to 0), the probability will no longer be zero even if
+						a word is not present in the training dataset.</p>
+					<h3>Lemmatization</h3>
+					<p>Lemmatization is the process of reducing a word to its base or dictionary form, known as a lemma.
+						It involves analyzing the morphological structure of the word and its context to determine its
+						base form.</p>
+					<p>The goal of lemmatization is to reduce a word to its root form, also called a lemma. For example,
+						the verb "running" would be identified as "run."</p>
+
+					<h3>Contribution:</h3>
+					<p>removed special charecters and changed the dataset Review column into lower case</P>
+					<img src="images/data_processing.png" width="600" height="100" />
+					<p>Here the dataset is divide into 3 parts, train data, dev data, test data</p>
+					<img src="images/train_dev_test.png" width="700" height="200" />
+					<p>Laplace Smoothing: Initialized value of 0.000000000000000001 for calculation conditional
+						probability while testing.</p>
+					<p>created a list pronouns, this list has the most common words like 'a','the','is'..., and deleted
+						these words from vocabulary and then did prediction on test dataset, before deleting pronouns
+						perfored prediction on dev data."</p>
+					<p>Derived Top 10 words that predicts each class</p>
+					<img src="images/top.png" width="500" height="100" />
+					<p>Accuracy using conditional probability on test dataset</p>
+					<img src="images/conditional_probability_dataset.png" width="700" height="150" />
+					<p>Accuracy using Navie Base Classification on test dataset
+					<p>
+						<img src="images/accu_navie_base.png" style="width:700;height:200" />
+					<p></p>
+					<p></p>
+					<p></p>
+					<p><a href="docs/text_classification_fresh_rotten.ipynb"
+							download="Text_Classifier_Notebook">Download Jupyter notebook</a></p>
+					<p><a href="">GitHub Link</p>
+					<p></p>
+					<p></p>
+					<p></p>
+
+					<p></p>
+					<h3>Reference</h3>
+					<p><cite>[1]<a
+								href="https://www.kaggle.com/code/ceocampo/movie-classification-of-rotten-tomatoes-reviews">
+								https://www.kaggle.com/code/ceocampo/movie-classification-of-rotten-tomatoes-reviews</a></cite>
+					</p>
+					<p><cite>[2]<a href="https://machinelearningmastery.com/naive-bayes-classifier-scratch-python/">
+								https://machinelearningmastery.com/naive-bayes-classifier-scratch-python/</a></cite></p>
+					<p><cite>[3]<a href="https://statisticsbyjim.com/probability/conditional-probability/">
+								https://statisticsbyjim.com/probability/conditional-probability/</a></cite></p>
+					<p><cite>[4]<a href="https://medium.com/analytics-vidhya/na%C3%AFve-bayes-algorithm-5bf31e9032a2">
+								https://medium.com/analytics-vidhya/na%C3%AFve-bayes-algorithm-5bf31e9032a2</a></cite>
+					</p>
+					<p><cite>[5]<a
+								href="https://towardsdatascience.com/laplace-smoothing-in-na%C3%AFve-bayes-algorithm-9c237a8bdece">
+								https://towardsdatascience.com/laplace-smoothing-in-na%C3%AFve-bayes-algorithm-9c237a8bdece</a></cite>
+					</p>
+					<p><cite>[6]<a
+								href="https://www.techtarget.com/searchenterpriseai/definition/lemmatization#:~:text=Lemmatization%20takes%20a%20word%20and,its%20lemma%2C%20%22walk.%22">
+								https://www.techtarget.com/searchenterpriseai/definition/lemmatization#:~:text=Lemmatization%20takes%20a%20word%20and,its%20lemma%2C%20%22walk.%22</a></cite>
+					</p 
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
