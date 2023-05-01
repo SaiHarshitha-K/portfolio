@@ -1,0 +1,396 @@
+<html>
+
+<head>
+	<title>Main Project</title>
+	<link rel="stylesheet" href="assets/css/blogcss.css" />
+
+	<head>
+
+	<body style="background-color: #fff; align-items: center;">
+		<div class="header">
+			<h2>Text Classification: Top Reddit Posts and Comments</h2>
+			<hr>
+		</div>
+
+		<div class="row">
+			<div class="centercolumn">
+				<div class="card" style="width: 1000">
+					<img src="images/text_classifier.jpeg" alt="bayes image" width="1000" height="500">
+					<p></p>
+					<h3>Introduction</h3>
+					<p>We are provided with a dataset from Kaggle for this project. Our goal is to build a classifier given comment, predicting which subreddit category it belongs namely among Machine Learning, Artificial Intelligence, and Data Science</p>
+					<p></p>
+					<p></p>
+					<h3>Data Preprocessing:</h3>
+					<h4>Data collection:</h4>
+					<p> This dataset contains information about the top 1000 posts from three popular Reddit communities related to data science, namely Machine Learning, Artificial Intelligence, and Data Science.</p>
+					<p>It has two datasets: </p> 
+					<p>1. "Top_Posts.csv": This dataset contains details about the all-time top post of subreddits related to Data Science. The former contains 2987 rows and 9 columns.</p>
+					<img src="images/top_post.png" width="700" height="500" />
+					<p>2. "Top_Posts_Comments.csv": This dataset contains textual data of comments in all-time Top posts of subreddits. The former contains 223,174 rows and 2 columns.</p>
+					<img src="images/comments_main.png" width="700" height="400" />
+
+					<h4>Data cleaning:</h4>
+					<p>Removed  Special characters like punctuations, new line(\n), commas, @, #,….., and also removed urls from Top_Posts_Comments comment coloumn.</p>
+					<p>After removing special charecters and urls into column name comment1:<p>
+					<img src="images/clean_data_main.png" width="600" height="350" />
+					<h4>Data transformation:</h4>
+					<p>Merged the Top_Posts and Top_Posts_Comments datasets, by considering the column “post_id” as common column. The merged dataset contain, subreddit column from Top_Posts and all the columns from Top_Posts_Comments.</p>
+						<img src="images/merge_data_main.png" width="600" height="350" />
+					
+					<h3>Models:</h3>
+					<p>In this project, we'll compare various models.-- KNN classifier, decision tree classifier, Random Forest Classifier, Naïve bayes classifier(MultinomialNB and BernoulliNB).</p>
+					<h3>Split_ Data:</h3>
+					<p>We splitted the data into 3 parts: train, dev, and test datasets:</p>
+					<img src="images/split_data_main.png" width="700" height="350" />
+					<h3>CountVectorizer:</h3>
+					<p>CountVectorizer is used to convert a collection of text documents to a matrix of token (word) counts. It takes a corpus of text as input, tokenizes the text into individual words, and then counts the number of times each word occurs in each document. The resulting matrix can then be used as input to a machine learning algorithm.</p>
+					<p>The specific use of CountVectorizer in each model may vary slightly. For example, in MultinomialNB, CountVectorizer is typically used to convert text data into a document-term matrix, where each row represents a document and each column represents a term (word), with the values indicating the frequency of each term in each document. In DecisionTreeClassifier and Random Forest, CountVectorizer is often used as a pre-processing step to convert text data into a numerical representation that can be used as input to the decision tree or random forest algorithm. In KNN, CountVectorizer is used to convert text data into a numerical representation that can be used to calculate distances between documents.</p>
+					<img src="images/count_vector_main.png" width="700" height="150" />
+					<h3>Model 1: k-nearest neighbors (KNN):</h3>
+					<p>The k-nearest neighbors algorithm, also known as KNN or k-NN, is a non-parametric, supervised learning classifier, which uses proximity to make classifications or predictions about the grouping of an individual data point. In the case of classification, the KNN algorithm assigns a class to a given input sample by looking at the K-nearest neighbors to that sample in the training set, where the value of K is a hyperparameter. The class assigned to the input sample is determined by majority vote among its K-nearest neighbors. The KNN algorithm uses a distance metric such as Euclidean distance or Manhattan distance to measure the distance between samples.</p>
+					<img src="images/Knn_net_pic.jpeg" width="700" height="350" />
+					<p>for test dataset accuracy is:<p>
+					<img src="images/Knn_test_acc.png" width="700" height="250" />
+					<h3>Model 2: Decision Tree Classifier:</h3>
+					<p>A decision tree is a type of supervised machine learning algorithm that is commonly used for classification or regression tasks. It involves creating a tree-like model of decisions and their possible consequences, represented by nodes and branches, to predict the class or value of an input. The tree is built recursively by selecting the best feature to split the data and optimizing the split based on a criterion such as Gini impurity or entropy, (here by default it is Gini), with the goal of maximizing the information gain or reducing the impurity of the subsets. The decision tree is a simple yet powerful model that is easy to understand and interpret, and can handle both categorical and numerical features.</p>
+					
+					
+					<p>Gini Index is a powerful measure of the randomness or the impurity or entropy in the values of a dataset. Gini Index aims to decrease the impurities from the root nodes (at the top of decision tree) to the leaf nodes (vertical branches down the decision tree) of a decision tree model.</p>
+					<p>Formula of Gini Index</p>
+					<img src="images/Gini_Index.png" width="400" height="150" />
+
+ 
+<p>where,</p>
+<p>‘pi’ is the probability of an object being classified to a particular class.</p>
+While building the decision tree, we would prefer to choose the attribute/feature with the least Gini Index as the root node.
+</p>
+					<p>for test dataset accuracy is :</p>
+					<img src="images/test_accuracy_decidiontree.png" width="700" height="250" />
+					
+					
+					<h3> Model 3: RandomForestClassifier:</h3>
+					<p>Random Forest algorithm is a type of ensemble learning algorithm that combines multiple decision trees to create a forest of decision trees. Each decision tree in the forest is trained on a randomly sampled subset of the training data, and they vote to make the final prediction. This helps to reduce overfitting and increase the accuracy of the model. Random Forest algorithm can be used for both classification and regression tasks.</p>
+					<p>for test dataset the accuracy is :</p>
+					<img src="images/randon_forest_test.png" width="700" height="250" />
+					
+					<h3> Model 4: Navie bayes classification</h3>
+					<p>Naive Bayes is not a single algorithm but a group of algorithms where all of these algorithms share a common principle, i.e. every pair of features being classified must be independent of each other. Naive Bayes is a basic Bayesian classifier. It’s simple, fast, and widely used.</p>
+					<p>The Naive Bayes is a collection of three algorithms: MultinomialNB, BernoulliNB, GaussianNB </p>
+					<h3>Multinomial Naive Bayes:</h3>
+					<p>MultinomialNB implements the naive Bayes algorithm for multinomially distributed data, and is one of the two classic naive Bayes variants used in text classification (where the data are typically represented as word vector counts),The distribution is parametrized by vectors <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>&#x3B8;</mi>
+    <mi>y</mi>
+  </msub>
+  <mo>=</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>&#x3B8;</mi>
+    <mrow data-mjx-texclass="ORD">
+      <mi>y</mi>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>,</mo>
+  <mo>&#x2026;</mo>
+  <mo>,</mo>
+  <msub>
+    <mi>&#x3B8;</mi>
+    <mrow data-mjx-texclass="ORD">
+      <mi>y</mi>
+      <mi>n</mi>
+    </mrow>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>
+for each class 
+, where 
+ is the number of features (in text classification, the size of the vocabulary) and <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>&#x3B8;</mi>
+    <mrow data-mjx-texclass="ORD">
+      <mi>y</mi>
+      <mi>i</mi>
+    </mrow>
+  </msub>
+</math>
+is the probability <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>P</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>x</mi>
+    <mi>i</mi>
+  </msub>
+  <mo>&#x2223;</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math>
+of feature 
+ appearing in a sample belonging to class <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>y</mi>
+</math> .
+					
+					
+					<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <msub>
+    <mrow data-mjx-texclass="ORD">
+      <mover>
+        <mi>&#x3B8;</mi>
+        <mo stretchy="false">^</mo>
+      </mover>
+    </mrow>
+    <mrow data-mjx-texclass="ORD">
+      <mi>y</mi>
+      <mi>i</mi>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <mfrac>
+    <mrow>
+      <msub>
+        <mi>N</mi>
+        <mrow data-mjx-texclass="ORD">
+          <mi>y</mi>
+          <mi>i</mi>
+        </mrow>
+      </msub>
+      <mo>+</mo>
+      <mi>&#x3B1;</mi>
+    </mrow>
+    <mrow>
+      <msub>
+        <mi>N</mi>
+        <mi>y</mi>
+      </msub>
+      <mo>+</mo>
+      <mi>&#x3B1;</mi>
+      <mi>n</mi>
+    </mrow>
+  </mfrac>
+</math><p>
+					<p>where, <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>N</mi>
+    <mrow data-mjx-texclass="ORD">
+      <mi>y</mi>
+      <mi>i</mi>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <munder>
+    <mo data-mjx-texclass="OP">&#x2211;</mo>
+    <mrow data-mjx-texclass="ORD">
+      <mi>x</mi>
+      <mo>&#x2208;</mo>
+      <mi>T</mi>
+    </mrow>
+  </munder>
+  <msub>
+    <mi>x</mi>
+    <mi>i</mi>
+  </msub>
+</math>is the number of times feature <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>i</mi>
+</math>
+ appears in a sample of class <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>y</mi>
+</math>
+ in the training set <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>T</mi>
+</math>
+, and <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>N</mi>
+    <mrow data-mjx-texclass="ORD">
+      <mi>y</mi>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <munderover>
+    <mo data-mjx-texclass="OP">&#x2211;</mo>
+    <mrow data-mjx-texclass="ORD">
+      <mi>i</mi>
+      <mo>=</mo>
+      <mn>1</mn>
+    </mrow>
+    <mrow data-mjx-texclass="ORD">
+      <mi>n</mi>
+    </mrow>
+  </munderover>
+  <msub>
+    <mi>N</mi>
+    <mrow data-mjx-texclass="ORD">
+      <mi>y</mi>
+      <mi>i</mi>
+    </mrow>
+  </msub>
+</math>
+ is the total count of all features for class <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>y</mi>
+</math>
+.</p>
+<p> for test datset accuracy is </p>
+<img src="images/Multinomial_test_accuracy.png" width="700" height="250" />
+					<h3>Bernoulli Naive Bayes:</h3>
+					<p>BernoulliNB implements the naive Bayes training and classification algorithms for data that is distributed according to multivariate Bernoulli distributions; i.e., there may be multiple features but each one is assumed to be a binary-valued (Bernoulli, boolean) variable. Therefore, this class requires samples to be represented as binary-valued feature vectors; if handed any other kind of data, a BernoulliNB instance may binarize its input (depending on the binarize parameter).</p>
+					<p>The decision rule for Bernoulli naive Bayes is based on</p>
+					<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <p><mi>P</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>x</mi>
+    <mi>i</mi>
+  </msub>
+  <mo>&#x2223;</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>P</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>x</mi>
+    <mi>i</mi>
+  </msub>
+  <mo>=</mo>
+  <mn>1</mn>
+  <mo>&#x2223;</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <msub>
+    <mi>x</mi>
+    <mi>i</mi>
+  </msub>
+  <mo>+</mo>
+  <mo stretchy="false">(</mo>
+  <mn>1</mn>
+  <mo>&#x2212;</mo>
+  <mi>P</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>x</mi>
+    <mi>i</mi>
+  </msub>
+  <mo>=</mo>
+  <mn>1</mn>
+  <mo>&#x2223;</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">(</mo>
+  <mn>1</mn>
+  <mo>&#x2212;</mo>
+  <msub>
+    <mi>x</mi>
+    <mi>i</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math></p>
+<p>which differs from multinomial NB’s rule in that it explicitly penalizes the non-occurrence of a feature <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>i</mi>
+</math>
+ that is an indicator for class <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>y</mi>
+</math>
+, where the multinomial variant would simply ignore a non-occurring feature.</p>
+<p> for test dataset accuracy is :</p>
+<img src="images/bernoline_test_acc.png" width="700" height="250" />				
+
+
+					<h3>Lemmatization</h3>
+					<p>Lemmatization is the process of reducing a word to its base or dictionary form, known as a lemma.
+						It involves analyzing the morphological structure of the word and its context to determine its
+						base form.</p>
+					<p>The goal of lemmatization is to reduce a word to its root form, also called a lemma. For example,
+						the verb "running" would be identified as "run."</p>
+					<p> After using lemmatization on MultinomialNB the accuracy of test dataset is </p>
+					<img src="images/Lemmitization_multi.png" width="700" height="250" />
+
+					<h3>Contribution:</h3>
+					<p>-> Removed special charecters and changed the dataset Review column into lower case</P>
+					<p>-> Merged the dataset <p>
+					<p>-> Here the dataset is divide into 3 parts, train data, dev data, test data</p>
+					<p>-> Evaluated different models on given dataset:KNN classifier, decision tree classifier, Random Forest Classifier, Naïve bayes classifier(MultinomialNB and BernoulliNB) for Hyper parameter tuning checked differen k values in Knn and for different aplha values in Naive Bayes classification</p>
+					
+					<h4>Challenges:</h4><p> As this id large file and has rows 200,000, it took more time while executing random forest, decision tree, knn.</p>
+					<p></p>
+					<p></p>
+					<p></p>
+					<p><a href="docs/Main_Project_Text_Classification.ipynb"
+							download="Text_Classifier_Notebook">Download Jupyter notebook</a></p>
+					<p><a href="https://github.com/SaiHarshitha-K/Text-Classifier">GitHub Link</p>
+					<p><a href="https://youtu.be/_Txw4kFuvoU"> Youtube link</p>
+					<p></p>
+					<p></p>
+					<p></p>
+
+					<p></p>
+					<h3>Reference</h3>
+					<p><cite>[1]<a
+								href="https://scikit-learn.org/stable/modules/naive_bayes.html#multinomial-naive-bayes">
+								https://scikit-learn.org/stable/modules/naive_bayes.html#multinomial-naive-bayes</a></cite>
+					</p>
+					<p><cite>[2]<a href="https://towardsdatascience.com/multinomial-na%C3%AFve-bayes-for-documents-classification-and-natural-language-processing-nlp-e08cc848ce6">
+								https://towardsdatascience.com/multinomial-na%C3%AFve-bayes-for-documents-classification-and-natural-language-processing-nlp-e08cc848ce6</a></cite></p>
+					<p><cite>[3]<a href="https://iq.opengenus.org/bernoulli-naive-bayes/">
+								https://iq.opengenus.org/bernoulli-naive-bayes/</a></cite></p>
+					<p><cite>[4]<a href="https://medium.com/@nansha3120/bernoulli-naive-bayes-and-its-implementation-cca33ccb8d2e">
+								https://medium.com/@nansha3120/bernoulli-naive-bayes-and-its-implementation-cca33ccb8d2e</a></cite>
+					</p>
+					<p><cite>[5]<a
+								href="https://www.ibm.com/topics/knn">
+								https://www.ibm.com/topics/knn</a></cite>
+					</p>
+					<p><cite>[6]<a
+								href="https://scikit-learn.org/stable/modules/neighbors.html#classification">https://scikit-learn.org/stable/modules/neighbors.html#classification</a></cite>
+					</p>
+					<p><cite>[7]<a
+								href="https://www.ibm.com/topics/knn#:~:text=The%20k%2Dnearest%20neighbors%20algorithm%2C%20also%20known%20as%20KNN%20or,of%20an%20individual%20data%20point.">
+								https://www.ibm.com/topics/knn#:~:text=The%20k%2Dnearest%20neighbors%20algorithm%2C%20also%20known%20as%20KNN%20or,of%20an%20individual%20data%20point.</a></cite>
+					</p>
+					<p><cite>[8]<a
+								href="https://www.analyticsvidhya.com/blog/2021/04/beginners-guide-to-decision-tree-classification-using-python/">
+								https://www.analyticsvidhya.com/blog/2021/04/beginners-guide-to-decision-tree-classification-using-python/</a></cite>
+					</p>
+					<p><cite>[9]<a
+								href="https://blog.quantinsti.com/gini-index/#:~:text=Gini%20Index%20is%20a%20powerful,of%20a%20decision%20tree%20model.">
+								https://blog.quantinsti.com/gini-index/#:~:text=Gini%20Index%20is%20a%20powerful,of%20a%20decision%20tree%20model.</a></cite>
+					</p>
+					<p><cite>[10]<a
+								href="https://scikit-learn.org/stable/modules/tree.html">
+								https://scikit-learn.org/stable/modules/tree.html</a></cite>
+	
+					</p>
+					</p>
+					<p><cite>[11]<a
+								href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.Binarizer.html">
+								https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.Binarizer.html</a></cite>
+					</p>
+					<p><cite>[12]<a
+								href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html">
+								https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html</a></cite>
+					</p>
+					<p><cite>[13]<a
+								href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">
+								https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html</a></cite>
+					</p>
+					</p>
+					<p><cite>[14]<a
+								href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html">
+								https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html</a></cite>
+					</p>
+					<p><cite>[14]<a
+								href="https://scikit-learn.org/stable/modules/naive_bayes.html#multinomial-naive-bayes">
+								https://scikit-learn.org/stable/modules/naive_bayes.html#multinomial-naive-bayes</a></cite>
+					</p>
+					<p><cite>[15]<a
+								href="https://www.techtarget.com/searchenterpriseai/definition/lemmatization#:~:text=Lemmatization%20takes%20a%20word%20and,its%20lemma%2C%20%22walk.%22">
+								https://www.techtarget.com/searchenterpriseai/definition/lemmatization#:~:text=Lemmatization%20takes%20a%20word%20and,its%20lemma%2C%20%22walk.%22</a></cite>
+					</p 
+					
+					
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
