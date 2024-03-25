@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = trim($_POST["message"]);
 
     // Specify your email and subject
-    $recipient = "komati.harshitha99@gmail.com";
+    $recipient = "gmail";
     $subject = "New contact from $name from portfolio";
 
     // Build the email content
