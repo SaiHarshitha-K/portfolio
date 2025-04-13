@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Suicide Detection Project - Machine Learning + Flask</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      line-height: 1.7;
+      background-color: #f9f9f9;
+      color: #222;
+    }
+    h1, h2, h3 {
+      color: #2f5d34;
+    }
+    code {
+      background: #eef;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 12px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    blockquote {
+      background: #fff9e6;
+      padding: 12px 16px;
+      border-left: 4px solid #ffc107;
+      border-radius: 5px;
+    }
+	img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 20px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 20px 15px;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+<h1> Suicide Intent Detection — Machine Learning + Flask</h1>
+
+<p><strong>⚠️Disclaimer:</strong> This project is for <strong>educational and personal use only</strong>. It is not medically validated and should not be used as a diagnostic or clinical tool.</p>
+
+<h2>Introduction</h2>
+<p>This project is focused on building a machine learning-based text classification system to predict whether a message contains suicidal intent. It includes a trained model and a live web application using Flask that allows users to test predictions in real-time.</p>
+
+<h2> Dataset</h2>
+<p>I used the publicly available <a href="https://www.kaggle.com/datasets/nikhileswarkomati/suicide-watch" target="_blank">Suicide and Depression Detection Dataset</a> from Kaggle, which is licensed under CC BY-SA 4.0. The dataset contains social media-like messages labeled as <code>suicide</code> or <code>non-suicide</code>.</p>
+
+<h3>Train/Dev/Test Split</h3>
+<p>
+  The dataset was manually divided into:
+</p>
+<ul>
+  <li><strong>Train Set</strong>: 70%</li>
+  <li><strong>Dev Set</strong>: 15%</li>
+  <li><strong>Test Set</strong>: 15%</li>
+</ul>
+
+<p>This helped in training, validating, and evaluating the model effectively. Below is a snapshot of how the split looks:</p>
+
+<div class="screenshot">
+  <img src="images/dataset.png" alt="Dataset split: train, dev, test examples" />
+</div>
+
+
+
+<h2> Preprocessing</h2>
+<ul>
+  <li>Lowercasing all text</li>
+  <li>Removing special characters</li>
+  <li>Stopword removal</li>
+  <li>Label encoding (suicide → 1, non-suicide → 0)</li>
+  <li>Train/dev set split</li>
+</ul>
+
+<h2> Technologies Used</h2>
+<ul>
+  <li><strong>Python</strong> for scripting and ML pipeline</li>
+  <li><strong>scikit-learn</strong> + <strong>XGBoost</strong> for model training</li>
+  <li><strong>Flask</strong> for the web app</li>
+  <li><strong>joblib</strong> to save and load the model</li>
+  <li><strong>HTML/CSS</strong> for the user interface</li>
+</ul>
+
+<h2>Models Trained</h2>
+<p>Initially, I experimented with PySpark models:</p>
+<ul>
+  <li>Naive Bayes (~89%)</li>
+  <li>Gradient Boosted Trees (~86%)</li>
+  <li>Random Forest (~82%)</li>
+</ul>
+
+<h2>Model Performance Comparison</h2>
+<p>
+  Below is a snapshot of how the three trained models performed on the test dataset:
+</p>
+
+<div class="screenshot">
+  <img src="images/test_res.png" alt="Test results for Naive Bayes, Random Forest, and GBT" />
+</div>
+
+<ul>
+  <li><strong>Naive Bayes</strong>: Best overall performance (~89% accuracy)</li>
+  <li><strong>Gradient Boosted Trees</strong>: Solid performance with better precision</li>
+
+
+<p>For final deployment, I chose a lightweight and portable solution:</p>
+<pre>
+CountVectorizer → TfidfTransformer → XGBClassifier
+</pre>
+
+<h3>Evaluation on Dev Set</h3>
+<div class="screenshot">
+  <img src="images/xgb.png" alt="XGBoost model evaluation metrics on dev set" />
+</div>
+
+<ul>
+  <li><strong>Accuracy</strong>: 91.95%</li>
+  <li><strong>Precision</strong>: 92.03%</li>
+  <li><strong>Recall</strong>: 91.95%</li>
+  <li><strong>F1-score</strong>: 91.94%</li>
+</ul>
+
+
+<h2>Web App (Flask)</h2>
+<p>I created a simple web app using Flask where users can paste a message and view the prediction result. </p>
+
+<div class="screenshot">
+  <img src="images/webapp.png" alt="Flask App Screenshot">
+</div>
+
+
+<h3>Example Samples</h3>
+<pre>
+" I cant take this anymore..." → suicide  
+"I’m finally feeling better" → non-suicide
+</pre>
+
+<h2>Project Highlights</h2>
+<ul>
+  <li>Built a full end-to-end text classification system</li>
+  <li>Explored model training in both PySpark and scikit-learn pipelines</li>
+  <li>Implemented a functional and user-friendly interface using Flask</li>
+  <li>Handled input processing, result display, and safe state management in the app</li>
+
+</ul>
+
+<h2>Project Learnings and Impact</h2>
+<ul>
+  <li>Designed and implemented a complete ML pipeline from preprocessing to model inference</li>
+  <li>Gained hands-on experience with feature extraction using CountVectorizer and TF-IDF</li>
+  <li>Built a production-ready interface using Flask to serve model predictions</li>
+  <li>Applied machine learning techniques in a practical web application using Python and Flask</li>
+
+</ul>
+
+
+<h2>🚀 What's Next?</h2>
+<p>
+In the future, I plan to:
+<ul>
+  <li>Visualize model confidence scores</li>
+  <li>Deploy the app on Render or Hugging Face</li>
+  <li>Explore transformer-based models for deeper context understanding</li>
+</ul>
+</p>
+
+</body>
+</html>
